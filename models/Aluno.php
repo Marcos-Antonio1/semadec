@@ -13,8 +13,11 @@ use Yii;
  * @property int $numero
  * @property int $idPenalidade
  *
+ * @property Penalidadade $penalidade
  * @property AlunoHasTime[] $alunoHasTimes
  * @property Time[] $timeIdTimes
+ * @property Escrincoes[] $escrincoes
+ * @property Evento[] $eventoIdpalestras
  */
 class Aluno extends \yii\db\ActiveRecord
 {
@@ -36,6 +39,7 @@ class Aluno extends \yii\db\ActiveRecord
             [['Matricula', 'numero', 'idPenalidade'], 'integer'],
             [['nome', 'email'], 'string', 'max' => 45],
             [['Matricula'], 'unique'],
+            [['idPenalidade'], 'exist', 'skipOnError' => true, 'targetClass' => Penalidadade::className(), 'targetAttribute' => ['idPenalidade' => 'idPenalidadade']],
         ];
     }
 
@@ -56,6 +60,14 @@ class Aluno extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getPenalidade()
+    {
+        return $this->hasOne(Penalidadade::className(), ['idPenalidadade' => 'idPenalidade']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getAlunoHasTimes()
     {
         return $this->hasMany(AlunoHasTime::className(), ['Aluno_Matricula' => 'Matricula']);
@@ -67,5 +79,21 @@ class Aluno extends \yii\db\ActiveRecord
     public function getTimeIdTimes()
     {
         return $this->hasMany(Time::className(), ['idTime' => 'Time_idTime'])->viaTable('aluno_has_time', ['Aluno_Matricula' => 'Matricula']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEscrincoes()
+    {
+        return $this->hasMany(Escrincoes::className(), ['Aluno_Matricula' => 'Matricula']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEventoIdpalestras()
+    {
+        return $this->hasMany(Evento::className(), ['idpalestra' => 'evento_idpalestra'])->viaTable('escrincoes', ['Aluno_Matricula' => 'Matricula']);
     }
 }
