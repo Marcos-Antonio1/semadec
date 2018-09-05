@@ -5,11 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Adm */
 
-$this->title = Yii::t('app', 'Update Adm: ' . $model->idADM, [
-    'nameAttribute' => '' . $model->idADM,
+$this->title = Yii::t('app', 'Update Adm: ' . $model->id, [
+    'nameAttribute' => '' . $model->id,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Adms'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->idADM, 'url' => ['view', 'id' => $model->idADM]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Adm'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="adm-update">

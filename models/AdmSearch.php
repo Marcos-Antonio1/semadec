@@ -18,8 +18,8 @@ class AdmSearch extends Adm
     public function rules()
     {
         return [
-            [['idADM'], 'integer'],
-            [['Username', 'Password', 'auth_key', 'access_token'], 'safe'],
+            [['id'], 'integer'],
+            [['username', 'password', 'auth_key', 'access_token'], 'safe'],
         ];
     }
 
@@ -59,11 +59,11 @@ class AdmSearch extends Adm
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idADM' => $this->idADM,
+            'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'Username', $this->Username])
-            ->andFilterWhere(['like', 'Password', $this->Password])
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'password', $this->password])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'access_token', $this->access_token]);
 

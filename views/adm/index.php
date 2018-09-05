@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\AdmSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Adms');
+$this->title = Yii::t('app', 'Adm');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="adm-index">
@@ -25,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idADM',
-            'Username',
-            'Password',
+            'id',
+            'username',
+            'password',
             'auth_key',
             'access_token',
 
