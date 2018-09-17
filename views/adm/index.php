@@ -17,21 +17,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Adm'), ['create'], ['class' => 'btn btn-success']) ?>
+        
+    <p>
+        <?= Html::a(Yii::t('app', 'Cadastrar Aluno'), ['aluno/create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'username',
-            'password',
-            'auth_key',
-            'access_token',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+    <p>
+        <?= Html::a(Yii::t('app', 'Cadastrar Esporte'), ['esporte/create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <p>
+        <?= Html::a(Yii::t('app', 'Cadastrar Jogos'), ['jogos/create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <p>
+        <?= Html::a(Yii::t('app', 'Cadastrar Time'), ['time/create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <p>
+        <?= Html::a(Yii::t('app', 'Cadastar Turma'), ['turma/create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <p>
+        <?= Html::a(Yii::t('app', 'Cadastrar Semadec'), ['semadec/create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <p>
+        <?= Html::a(Yii::t('app', 'Cadastar Evento'), ['evento/create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <p>
+        <?= Html::a(Yii::t('app', 'Cadastrar Formador'), ['formador/create'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>
