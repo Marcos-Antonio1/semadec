@@ -35,12 +35,13 @@ class AlunoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AlunoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    
+    $searchModel = new AlunoSearch();
+    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+    return $this->render('index', [
+        'searchModel' => $searchModel,
+        'dataProvider' => $dataProvider,
         ]);
     }
 
