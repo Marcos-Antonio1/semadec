@@ -56,6 +56,11 @@ class EsporteController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+      public function actionMostrar(){
+          return $this->render('teste' ,[
+              'esporte'=>Esporte::buscar(),
+          ]);
+      }
 
     /**
      * Creates a new Esporte model.

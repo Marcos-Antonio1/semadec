@@ -23,6 +23,7 @@ $config = [
             //'identityClass' => 'app\models\User',
             'identityClass' => 'app\models\Adm',
             'enableAutoLogin' => true,
+            
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

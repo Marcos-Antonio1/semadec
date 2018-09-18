@@ -99,7 +99,7 @@ class AlunoController extends Controller
     /**
      * Deletes an existing Aluno model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @p1aram integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */

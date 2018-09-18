@@ -61,4 +61,7 @@ class Esporte extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Campeonato::className(), ['idEsporte' => 'idEsporte']);
     }
+     public function buscar(){
+       return $esporte=self::find()->all();
+     }
 }
