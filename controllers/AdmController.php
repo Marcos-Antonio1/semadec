@@ -21,7 +21,7 @@ class AdmController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
+           'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['create', 'delete', 'update'],
                 'rules' => [

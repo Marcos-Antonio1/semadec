@@ -21,7 +21,7 @@ class AlunoController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
+            /*'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['create', 'delete', 'update'],
                 'rules' => [
@@ -31,7 +31,7 @@ class AlunoController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
-            ],
+            ],*/
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
