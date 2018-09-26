@@ -36,10 +36,16 @@ AppAsset::register($this);
       	<div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
 			<ul class="navbar-nav ml-auto ml-md-0 nav-right">
             <?php 
-                if(!Yii::$app->user->isGuest){
-                    echo '<a class="navbar-brand mr-1" href="' . Url::toRoute('site/login') . '">Login</a>';
+                if(Yii::$app->user->isGuest){
+					echo '<a class="btn btn-primary btn-sm" href="' . Url::toRoute('site/login') . '">Login</a>';
                 }else {
-                    echo '<a class="navbar-brand mr-1" href="' . Url::toRoute('site/login') . '">Logout</a>';
+					//echo '<a class="navbar-brand mr-1" href="' . Url::toRoute(['site/logout']) . '">Logout</a>';
+					echo Html::beginForm(['/site/logout'], 'post')
+						. Html::submitButton(
+							'Logout (' . Yii::$app->user->identity->username . ')',
+							['class' => 'btn btn-danger btn-sm']
+						)
+					. Html::endForm();
                 }
             ?>
 			</ul>
@@ -48,7 +54,7 @@ AppAsset::register($this);
 	<div id="wrapper">
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav">
-            <?php if(Yii::$app->user->isGuest){
+            <?php if(!Yii::$app->user->isGuest){
                  echo '<li class="nav-item active">
                     <a class="nav-link" href="' . Url::toRoute('/adm/index') . '">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
