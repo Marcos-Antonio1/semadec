@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\models\Adm;
 use app\models\AdmSearch;
 use yii\web\Controller;
@@ -20,6 +21,17 @@ class AdmController extends Controller
     public function behaviors()
     {
         return [
+           'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'delete', 'update'],
+                'rules' => [
+                    [
+                        'actions' => ['create', 'delete', 'update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
