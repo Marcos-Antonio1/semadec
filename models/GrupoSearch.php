@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Time;
+use app\models\Grupo;
 
 /**
- * TimeSearch represents the model behind the search form of `app\models\Time`.
+ * GrupoSearch represents the model behind the search form of `app\models\Grupo`.
  */
-class TimeSearch extends Time
+class GrupoSearch extends Grupo
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class TimeSearch extends Time
     public function rules()
     {
         return [
-            [['idTime', 'idTurma', 'pontuacao', 'grupo_idGrupo'], 'integer'],
-            [['tipo', 'Nome'], 'safe'],
+            [['idGrupo'], 'integer'],
+            [['Nome'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TimeSearch extends Time
      */
     public function search($params)
     {
-        $query = Time::find();
+        $query = Grupo::find();
 
         // add conditions that should always apply here
 
@@ -59,14 +59,10 @@ class TimeSearch extends Time
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idTime' => $this->idTime,
-            'idTurma' => $this->idTurma,
-            'pontuacao' => $this->pontuacao,
-            'grupo_idGrupo' => $this->grupo_idGrupo,
+            'idGrupo' => $this->idGrupo,
         ]);
 
-        $query->andFilterWhere(['like', 'tipo', $this->tipo])
-            ->andFilterWhere(['like', 'Nome', $this->Nome]);
+        $query->andFilterWhere(['like', 'Nome', $this->Nome]);
 
         return $dataProvider;
     }

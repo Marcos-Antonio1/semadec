@@ -62,7 +62,8 @@ class Jogos extends \yii\db\ActiveRecord
      */
     public function getTime1()
     {
-        return $this->hasOne(Time::className(), ['idTime' => 'idTime1']);
+         
+    return $this->hasOne(Time::className(), ['idTime' => 'idTime1']);
     }
 
     /**
@@ -88,4 +89,5 @@ class Jogos extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Arbitro::className(), ['idArbitro' => 'Arbitro_idArbitro'])->viaTable('jogos_has_arbitro', ['Jogos_idJogos' => 'idJogos']);
     }
+ 
 }

@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Jogos;
-use app\models\JogosSearch;
+use app\models\Grupo;
+use app\models\GrupoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * JogosController implements the CRUD actions for Jogos model.
+ * GrupoController implements the CRUD actions for Grupo model.
  */
-class JogosController extends Controller
+class GrupoController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class JogosController extends Controller
     }
 
     /**
-     * Lists all Jogos models.
+     * Lists all Grupo models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new JogosSearch();
+        $searchModel = new GrupoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,14 +44,8 @@ class JogosController extends Controller
         ]);
     }
 
-      public function MostrarJogos(){
-          return $this->render('teste',[
-              'jogos'=>Jogos::buscartimes(),
-          ]);
-      }
-
     /**
-     * Displays a single Jogos model.
+     * Displays a single Grupo model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -64,16 +58,16 @@ class JogosController extends Controller
     }
 
     /**
-     * Creates a new Jogos model.
+     * Creates a new Grupo model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Jogos();
+        $model = new Grupo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idJogos]);
+            return $this->redirect(['view', 'id' => $model->idGrupo]);
         }
 
         return $this->render('create', [
@@ -82,7 +76,7 @@ class JogosController extends Controller
     }
 
     /**
-     * Updates an existing Jogos model.
+     * Updates an existing Grupo model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -93,7 +87,7 @@ class JogosController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idJogos]);
+            return $this->redirect(['view', 'id' => $model->idGrupo]);
         }
 
         return $this->render('update', [
@@ -102,7 +96,7 @@ class JogosController extends Controller
     }
 
     /**
-     * Deletes an existing Jogos model.
+     * Deletes an existing Grupo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -116,15 +110,15 @@ class JogosController extends Controller
     }
 
     /**
-     * Finds the Jogos model based on its primary key value.
+     * Finds the Grupo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Jogos the loaded model
+     * @return Grupo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Jogos::findOne($id)) !== null) {
+        if (($model = Grupo::findOne($id)) !== null) {
             return $model;
         }
 

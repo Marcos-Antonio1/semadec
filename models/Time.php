@@ -10,11 +10,15 @@ use Yii;
  * @property int $idTime
  * @property string $tipo
  * @property int $idTurma
+ * @property string $Nome
+ * @property int $pontuacao
+ * @property int $grupo_idGrupo
  *
  * @property AlunoHasTime[] $alunoHasTimes
  * @property Aluno[] $alunoMatriculas
  * @property Jogos[] $jogos
  * @property Jogos[] $jogos0
+ * @property Grupo $grupoIdGrupo
  * @property Turma $turma
  * @property TimeCampeonato[] $timeCampeonatos
  * @property Campeonato[] $campeonatos
@@ -35,9 +39,10 @@ class Time extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tipo'], 'required'],
-            [['idTurma'], 'integer'],
-            [['tipo'], 'string', 'max' => 45],
+            [['tipo', 'grupo_idGrupo'], 'required'],
+            [['idTurma', 'pontuacao', 'grupo_idGrupo'], 'integer'],
+            [['tipo', 'Nome'], 'string', 'max' => 45],
+            [['grupo_idGrupo'], 'exist', 'skipOnError' => true, 'targetClass' => Grupo::className(), 'targetAttribute' => ['grupo_idGrupo' => 'idGrupo']],
             [['idTurma'], 'exist', 'skipOnError' => true, 'targetClass' => Turma::className(), 'targetAttribute' => ['idTurma' => 'idTurma']],
         ];
     }
@@ -51,6 +56,9 @@ class Time extends \yii\db\ActiveRecord
             'idTime' => Yii::t('app', 'Id Time'),
             'tipo' => Yii::t('app', 'Tipo'),
             'idTurma' => Yii::t('app', 'Id Turma'),
+            'Nome' => Yii::t('app', 'Nome'),
+            'pontuacao' => Yii::t('app', 'Pontuacao'),
+            'grupo_idGrupo' => Yii::t('app', 'Grupo Id Grupo'),
         ];
     }
 
@@ -89,6 +97,14 @@ class Time extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getGrupoIdGrupo()
+    {
+        return $this->hasOne(Grupo::className(), ['idGrupo' => 'grupo_idGrupo']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTurma()
     {
         return $this->hasOne(Turma::className(), ['idTurma' => 'idTurma']);
@@ -109,4 +125,13 @@ class Time extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Campeonato::className(), ['idCampeonato' => 'idCampeonato'])->viaTable('time_campeonato', ['idTime' => 'idTime']);
     }
+      public function Classifi_grupo($id){
+        return $query=(new\yii\db\Query())
+        ->select(['Nome', 'Pontuacao'])
+        ->from ('time')
+        ->where('grupo_idGrupo=' .$id)
+        ->orderBy('pontuacao DESC')
+        ->all();
+      }
+
 }

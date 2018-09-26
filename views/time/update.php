@@ -9,7 +9,7 @@ $this->title = Yii::t('app', 'Update Time: ' . $model->idTime, [
     'nameAttribute' => '' . $model->idTime,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Times'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->idTime, 'url' => ['view', 'id' => $model->idTime]];
+$this->params['breadcrumbs'][] = ['label' => $model->idTime, 'url' => ['view', 'idTime' => $model->idTime, 'grupo_idGrupo' => $model->grupo_idGrupo]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="time-update">

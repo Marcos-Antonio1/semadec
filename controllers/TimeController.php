@@ -46,14 +46,15 @@ class TimeController extends Controller
 
     /**
      * Displays a single Time model.
-     * @param integer $id
+     * @param integer $idTime
+     * @param integer $grupo_idGrupo
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($idTime, $grupo_idGrupo)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($idTime, $grupo_idGrupo),
         ]);
     }
 
@@ -67,27 +68,36 @@ class TimeController extends Controller
         $model = new Time();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idTime]);
+            return $this->redirect(['view', 'idTime' => $model->idTime, 'grupo_idGrupo' => $model->grupo_idGrupo]);
         }
 
         return $this->render('create', [
             'model' => $model,
         ]);
     }
+    public function actionMostrar($id){
+        $model=new Time();
+        $model =Time::Classifi_grupo($id);
+
+        return $this->render('teste' ,[
+        'model'=>$model ,
+        ]);
+    }
 
     /**
      * Updates an existing Time model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $idTime
+     * @param integer $grupo_idGrupo
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($idTime, $grupo_idGrupo)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idTime, $grupo_idGrupo);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idTime]);
+            return $this->redirect(['view', 'idTime' => $model->idTime, 'grupo_idGrupo' => $model->grupo_idGrupo]);
         }
 
         return $this->render('update', [
@@ -98,13 +108,14 @@ class TimeController extends Controller
     /**
      * Deletes an existing Time model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param integer $idTime
+     * @param integer $grupo_idGrupo
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($idTime, $grupo_idGrupo)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($idTime, $grupo_idGrupo)->delete();
 
         return $this->redirect(['index']);
     }
@@ -112,13 +123,14 @@ class TimeController extends Controller
     /**
      * Finds the Time model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param integer $idTime
+     * @param integer $grupo_idGrupo
      * @return Time the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idTime, $grupo_idGrupo)
     {
-        if (($model = Time::findOne($id)) !== null) {
+        if (($model = Time::findOne(['idTime' => $idTime, 'grupo_idGrupo' => $grupo_idGrupo])) !== null) {
             return $model;
         }
 

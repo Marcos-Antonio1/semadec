@@ -28,6 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'idTime:datetime',
             'tipo',
             'idTurma',
+            'Nome',
+            'pontuacao',
+            //'grupo_idGrupo',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
