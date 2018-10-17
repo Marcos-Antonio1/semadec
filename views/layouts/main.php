@@ -27,33 +27,51 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+	<!-- NAV, Menu do top -->
+	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 		<a class="navbar-brand mr-1" href="<?= Url::home() ?>">Semadec</a>
 		<button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
   			<i class="fas fa-bars"></i>
 		</button>
 		<!-- Navbar -->
-      	<div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-			<ul class="navbar-nav ml-auto ml-md-0 nav-right">
-            <?php 
-                if(Yii::$app->user->isGuest){
-					echo '<a class="btn btn-primary btn-sm" href="' . Url::toRoute('site/login') . '">Login</a>';
-                }else {
-					//echo '<a class="navbar-brand mr-1" href="' . Url::toRoute(['site/logout']) . '">Logout</a>';
-					echo Html::beginForm(['/site/logout'], 'post')
-						. Html::submitButton(
-							'Logout (' . Yii::$app->user->identity->username . ')',
-							['class' => 'btn btn-danger btn-sm']
-						)
-					. Html::endForm();
-                }
-            ?>
-			</ul>
+      	 <div class=" d-sm-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+			
+				<?php 
+					if(Yii::$app->user->isGuest){
+						echo '<a class=" btn btn-primary btn-sm" href="' . Url::toRoute('site/login') . '">Login</a>';
+					}else {
+						//<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+						/*echo '<a class="navbar-brand mr-1" href="' . Url::toRoute(['site/logout']) . '">Logout</a>';
+						echo Html::beginForm(['/site/logout'], 'post')
+							. Html::submitButton(
+								'Logout (' . Yii::$app->user->identity->username . ')',
+								['class' => 'btn btn-danger btn-sm']
+							)
+						. Html::endForm(); */
+
+						echo Html::beginForm(['/site/logout'], 'post')
+							. Html::a(
+								'Logout (' . Yii::$app->user->identity->username . ')',
+								'#',
+								[
+									'class' => 'btn btn-danger btn-sm',
+									'data-toggle' => 'modal',
+									'data-target' => '#logoutModal'
+								]
+							)
+						. Html::endForm();
+					}
+				?>
+			
 		</div>
 	</nav>
+	<!-- Fim NAV, Menu do top -->
+
 	<div id="wrapper">
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav">
+			<!-- Insere o botão da área adminstrativa se estiver logado -->
             <?php if(!Yii::$app->user->isGuest){
                  echo '<li class="nav-item active">
                     <a class="nav-link" href="' . Url::toRoute('/adm/index') . '">
@@ -68,14 +86,13 @@ AppAsset::register($this);
             		<span>Campeonatos</span>
           		</a>
           		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            		<a class="dropdown-item" href="#">Futsal</a>
-            		<a class="dropdown-item" href="register.html">Vôlei</a>
-					<a class="dropdown-item" href="forgot-password.html">Handebol</a>
+            		<a class="dropdown-item" href="<?= Url::toRoute('/campeonato/index') ?>">Futsal</a>
+            		<a class="dropdown-item" href="<?= Url::toRoute('/campeonato/index') ?>">Vôlei</a>
+					<a class="dropdown-item" href="<?= Url::toRoute('/campeonato/index') ?>">Handebol</a>
          		</div>
         	</li>
-			<!-- Example split danger button -->
 			<li class="nav-item">
-    			<a class="nav-link" href="charts.html">
+    			<a class="nav-link" href="<?= Url::toRoute('/classificacao/index') ?>">
       				<i class="fas fa-fw fa-chart-area"></i>
 					<span>Classificações</span>
 				</a>
@@ -127,7 +144,12 @@ AppAsset::register($this);
     			<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
     				<div class="modal-footer">
       					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-      					<a class="btn btn-primary" href="login.html">Logout</a>
+						<?= Html::beginForm(['/site/logout'], 'post')
+							. Html::submitButton(
+								'Logout',
+								['class' => 'btn btn-danger']
+							)
+						. Html::endForm(); ?>
     				</div>
  				 </div>
 			</div>
