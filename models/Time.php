@@ -125,11 +125,12 @@ class Time extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Campeonato::className(), ['idCampeonato' => 'idCampeonato'])->viaTable('time_campeonato', ['idTime' => 'idTime']);
     }
-      public function Classifi_grupo($id){
+      public function Classifi_grupo(){
+
         return $query=(new\yii\db\Query())
-        ->select(['Nome', 'Pontuacao'])
+        ->select(['*'])
         ->from ('time')
-        ->where('grupo_idGrupo=' .$id)
+        //->where('grupo_idGrupo=')
         ->orderBy('pontuacao DESC')
         ->all();
       }

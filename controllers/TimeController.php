@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\models\buscas;
+
 
 /**
  * TimeController implements the CRUD actions for Time model.
@@ -48,7 +50,7 @@ class TimeController extends Controller
     public function actionIndex()
     {
         $searchModel = new TimeSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->listByGroup('1');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -87,13 +89,10 @@ class TimeController extends Controller
             'model' => $model,
         ]);
     }
-    public function actionMostrar($id){
-        $model=new Time();
-        $model =Time::Classifi_grupo($id);
-
-        return $this->render('teste' ,[
-        'model'=>$model ,
-        ]);
+    public function actionMostrar(){
+         return $this->render('teste', [
+             'times'=>Time::Classifi_grupo(),
+         ]);
     }
 
     /**

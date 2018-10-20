@@ -1,24 +1,18 @@
-<?php
+<h1> Classificação </h1>
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+<div class= 'Times'>
 
-/* @var $this yii\web\View */
-/* @var $model app\models\TimeSearch */
-/* @var $form yii\widgets\ActiveForm */
-?>
+<ul>
 
-<div class="time-search">
+<?php 
+    //foreach ($times as $time){
+      //  echo "<li>". $time->nome ."  " . $time->$pontuacao . "</li>";
 
-    <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
+    //}
 
-    <?= $form->field($model, 'Nome') ?>
-
-    <?= $form->field($model, 'pontuacao') ?>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
+    print_r($times);
+    ?>
+     <br>
+     
+    </ul>
+    </div>

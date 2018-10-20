@@ -32,6 +32,17 @@ class TimeSearch extends Time
         return Model::scenarios();
     }
 
+    public function listByGroup($id) {
+        $consulta = self::find()
+        ->where(['grupo_idGrupo'=>$id])->orderBy('pontuacao asc');
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $consulta,
+        ]);
+
+        return $dataProvider;
+    }
+
     /**
      * Creates data provider instance with search query applied
      *
